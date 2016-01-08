@@ -1,0 +1,514 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		719499091C40733100968504 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719499081C40733100968504 /* AppDelegate.swift */; };
+		7194990B1C40733100968504 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194990A1C40733100968504 /* ViewController.swift */; };
+		7194990E1C40733100968504 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7194990C1C40733100968504 /* Main.storyboard */; };
+		719499101C40733100968504 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7194990F1C40733100968504 /* Assets.xcassets */; };
+		719499131C40733100968504 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 719499111C40733100968504 /* LaunchScreen.storyboard */; };
+		7194991E1C40733200968504 /* OpenSourceVotingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194991D1C40733200968504 /* OpenSourceVotingTests.swift */; };
+		719499291C40733200968504 /* OpenSourceVotingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719499281C40733200968504 /* OpenSourceVotingUITests.swift */; };
+		719499371C4073E600968504 /* VotingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719499361C4073E600968504 /* VotingViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7194991A1C40733200968504 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 719498FD1C40733100968504 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 719499041C40733100968504;
+			remoteInfo = OpenSourceVoting;
+		};
+		719499251C40733200968504 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 719498FD1C40733100968504 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 719499041C40733100968504;
+			remoteInfo = OpenSourceVoting;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		719499051C40733100968504 /* OpenSourceVoting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSourceVoting.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		719499081C40733100968504 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7194990A1C40733100968504 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7194990D1C40733100968504 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7194990F1C40733100968504 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		719499121C40733100968504 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		719499141C40733100968504 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		719499191C40733200968504 /* OpenSourceVotingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenSourceVotingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7194991D1C40733200968504 /* OpenSourceVotingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceVotingTests.swift; sourceTree = "<group>"; };
+		7194991F1C40733200968504 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		719499241C40733200968504 /* OpenSourceVotingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenSourceVotingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		719499281C40733200968504 /* OpenSourceVotingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceVotingUITests.swift; sourceTree = "<group>"; };
+		7194992A1C40733200968504 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		719499361C4073E600968504 /* VotingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotingViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		719499021C40733100968504 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		719499161C40733200968504 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		719499211C40733200968504 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		719498FC1C40733100968504 = {
+			isa = PBXGroup;
+			children = (
+				719499071C40733100968504 /* OpenSourceVoting */,
+				7194991C1C40733200968504 /* OpenSourceVotingTests */,
+				719499271C40733200968504 /* OpenSourceVotingUITests */,
+				719499061C40733100968504 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		719499061C40733100968504 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				719499051C40733100968504 /* OpenSourceVoting.app */,
+				719499191C40733200968504 /* OpenSourceVotingTests.xctest */,
+				719499241C40733200968504 /* OpenSourceVotingUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		719499071C40733100968504 /* OpenSourceVoting */ = {
+			isa = PBXGroup;
+			children = (
+				719499081C40733100968504 /* AppDelegate.swift */,
+				7194990A1C40733100968504 /* ViewController.swift */,
+				719499361C4073E600968504 /* VotingViewController.swift */,
+				7194990C1C40733100968504 /* Main.storyboard */,
+				7194990F1C40733100968504 /* Assets.xcassets */,
+				719499111C40733100968504 /* LaunchScreen.storyboard */,
+				719499141C40733100968504 /* Info.plist */,
+			);
+			path = OpenSourceVoting;
+			sourceTree = "<group>";
+		};
+		7194991C1C40733200968504 /* OpenSourceVotingTests */ = {
+			isa = PBXGroup;
+			children = (
+				7194991D1C40733200968504 /* OpenSourceVotingTests.swift */,
+				7194991F1C40733200968504 /* Info.plist */,
+			);
+			path = OpenSourceVotingTests;
+			sourceTree = "<group>";
+		};
+		719499271C40733200968504 /* OpenSourceVotingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				719499281C40733200968504 /* OpenSourceVotingUITests.swift */,
+				7194992A1C40733200968504 /* Info.plist */,
+			);
+			path = OpenSourceVotingUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		719499041C40733100968504 /* OpenSourceVoting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7194992D1C40733200968504 /* Build configuration list for PBXNativeTarget "OpenSourceVoting" */;
+			buildPhases = (
+				719499011C40733100968504 /* Sources */,
+				719499021C40733100968504 /* Frameworks */,
+				719499031C40733100968504 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenSourceVoting;
+			productName = OpenSourceVoting;
+			productReference = 719499051C40733100968504 /* OpenSourceVoting.app */;
+			productType = "com.apple.product-type.application";
+		};
+		719499181C40733200968504 /* OpenSourceVotingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 719499301C40733200968504 /* Build configuration list for PBXNativeTarget "OpenSourceVotingTests" */;
+			buildPhases = (
+				719499151C40733200968504 /* Sources */,
+				719499161C40733200968504 /* Frameworks */,
+				719499171C40733200968504 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7194991B1C40733200968504 /* PBXTargetDependency */,
+			);
+			name = OpenSourceVotingTests;
+			productName = OpenSourceVotingTests;
+			productReference = 719499191C40733200968504 /* OpenSourceVotingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		719499231C40733200968504 /* OpenSourceVotingUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 719499331C40733200968504 /* Build configuration list for PBXNativeTarget "OpenSourceVotingUITests" */;
+			buildPhases = (
+				719499201C40733200968504 /* Sources */,
+				719499211C40733200968504 /* Frameworks */,
+				719499221C40733200968504 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				719499261C40733200968504 /* PBXTargetDependency */,
+			);
+			name = OpenSourceVotingUITests;
+			productName = OpenSourceVotingUITests;
+			productReference = 719499241C40733200968504 /* OpenSourceVotingUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		719498FD1C40733100968504 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = PaulWallace;
+				TargetAttributes = {
+					719499041C40733100968504 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = K857MQ7CX6;
+					};
+					719499181C40733200968504 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = K857MQ7CX6;
+						TestTargetID = 719499041C40733100968504;
+					};
+					719499231C40733200968504 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = K857MQ7CX6;
+						TestTargetID = 719499041C40733100968504;
+					};
+				};
+			};
+			buildConfigurationList = 719499001C40733100968504 /* Build configuration list for PBXProject "OpenSourceVoting" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 719498FC1C40733100968504;
+			productRefGroup = 719499061C40733100968504 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				719499041C40733100968504 /* OpenSourceVoting */,
+				719499181C40733200968504 /* OpenSourceVotingTests */,
+				719499231C40733200968504 /* OpenSourceVotingUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		719499031C40733100968504 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				719499131C40733100968504 /* LaunchScreen.storyboard in Resources */,
+				719499101C40733100968504 /* Assets.xcassets in Resources */,
+				7194990E1C40733100968504 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		719499171C40733200968504 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		719499221C40733200968504 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		719499011C40733100968504 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7194990B1C40733100968504 /* ViewController.swift in Sources */,
+				719499091C40733100968504 /* AppDelegate.swift in Sources */,
+				719499371C4073E600968504 /* VotingViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		719499151C40733200968504 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7194991E1C40733200968504 /* OpenSourceVotingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		719499201C40733200968504 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				719499291C40733200968504 /* OpenSourceVotingUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7194991B1C40733200968504 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 719499041C40733100968504 /* OpenSourceVoting */;
+			targetProxy = 7194991A1C40733200968504 /* PBXContainerItemProxy */;
+		};
+		719499261C40733200968504 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 719499041C40733100968504 /* OpenSourceVoting */;
+			targetProxy = 719499251C40733200968504 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7194990C1C40733100968504 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7194990D1C40733100968504 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		719499111C40733100968504 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				719499121C40733100968504 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7194992B1C40733200968504 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7194992C1C40733200968504 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7194992E1C40733200968504 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = OpenSourceVoting/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pw.OpenSourceVoting;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7194992F1C40733200968504 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = OpenSourceVoting/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pw.OpenSourceVoting;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		719499311C40733200968504 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = OpenSourceVotingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pw.OpenSourceVotingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenSourceVoting.app/OpenSourceVoting";
+			};
+			name = Debug;
+		};
+		719499321C40733200968504 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = OpenSourceVotingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pw.OpenSourceVotingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenSourceVoting.app/OpenSourceVoting";
+			};
+			name = Release;
+		};
+		719499341C40733200968504 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = OpenSourceVotingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pw.OpenSourceVotingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = OpenSourceVoting;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		719499351C40733200968504 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = OpenSourceVotingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pw.OpenSourceVotingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = OpenSourceVoting;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		719499001C40733100968504 /* Build configuration list for PBXProject "OpenSourceVoting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7194992B1C40733200968504 /* Debug */,
+				7194992C1C40733200968504 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7194992D1C40733200968504 /* Build configuration list for PBXNativeTarget "OpenSourceVoting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7194992E1C40733200968504 /* Debug */,
+				7194992F1C40733200968504 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		719499301C40733200968504 /* Build configuration list for PBXNativeTarget "OpenSourceVotingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				719499311C40733200968504 /* Debug */,
+				719499321C40733200968504 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		719499331C40733200968504 /* Build configuration list for PBXNativeTarget "OpenSourceVotingUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				719499341C40733200968504 /* Debug */,
+				719499351C40733200968504 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 719498FD1C40733100968504 /* Project object */;
+}
