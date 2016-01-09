@@ -11,7 +11,7 @@ import UIKit
 class VotingViewController: UIViewController {
 
     var firebaseRef : Firebase = Firebase(url: "https://tetheref.firebaseio.com/ClassSessions")
-    var currentStateInfo : CurrentStateInformationObject = CurrentStateInformationObject.SharedInstance
+    //var currentStateInfo : CurrentStateInformationObject = CurrentStateInformationObject.SharedInstance
     var studentCounterLabel: UILabel!
     var submitVoteButton: UIButton!
     var firstBar: UILabel!
@@ -36,7 +36,7 @@ class VotingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("View did load was called")
+        print("View did load was called")
         //calculate orginal percent incrase
         currentNumberOfVotes = 0
         //Add navigation items
@@ -89,15 +89,17 @@ class VotingViewController: UIViewController {
         submitVoteButton = UIButton(frame: CGRect(x: 0, y: submitButtonPlace, width: screenSize.width, height: choiceButtonHeight))
         submitVoteButton.backgroundColor = UIColor(white: 0.20, alpha: 1)
 //        if let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController as? RootViewController {
-        println(currentStateInfo.isTeacher)
-            if(currentStateInfo.isTeacher){
-                submitVoteButton.setTitle("Reset Votes", forState: UIControlState.Normal)
-                submitVoteButton.addTarget(self, action: "resetClassDatabaseVotes:", forControlEvents: UIControlEvents.TouchUpInside)
-            } else {
-                //println("Hey")
-                submitVoteButton.setTitle("Submit Vote", forState: UIControlState.Normal)
-                submitVoteButton.addTarget(self, action: "clickedSubmitVoteButton:", forControlEvents: UIControlEvents.TouchUpInside)
-            }
+        
+        //Need to implement a submit button here
+//        println(currentStateInfo.isTeacher)
+//            if(currentStateInfo.isTeacher){
+//                submitVoteButton.setTitle("Reset Votes", forState: UIControlState.Normal)
+//                submitVoteButton.addTarget(self, action: "resetClassDatabaseVotes:", forControlEvents: UIControlEvents.TouchUpInside)
+//            } else {
+//                //println("Hey")
+//                submitVoteButton.setTitle("Submit Vote", forState: UIControlState.Normal)
+//                submitVoteButton.addTarget(self, action: "clickedSubmitVoteButton:", forControlEvents: UIControlEvents.TouchUpInside)
+//            }
         submitVoteButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 17)
 //        println(UIApplication.sharedApplication().keyWindow?.rootViewController)
 //        submitVoteButton = UIButton(frame: CGRect(x: 0, y: submitButtonPlace, width: screenSize.width, height: choiceButtonHeight))
@@ -208,26 +210,26 @@ class VotingViewController: UIViewController {
             return
         }
         else if(lastButtonPressed == "1"){
-            var toIncrement = (firstChoiceCounterLabel.text?.toInt())! + 1
+            let toIncrement = (Int((firstChoiceCounterLabel.text)!))! + 1
             firstChoiceCounterLabel.text = String(toIncrement)
             //For now here but may refactor out later, the database update
             updateNumberOfVotesForLetter("A")
             updateNumberOfTotalVotes()
         }
         else if(lastButtonPressed == "2"){
-            var toIncrement = (secondChoiceCounterLabel.text?.toInt())! + 1
+            let toIncrement = (Int((secondChoiceCounterLabel.text)!))! + 1
             secondChoiceCounterLabel.text = String(toIncrement)
             updateNumberOfVotesForLetter("B")
             updateNumberOfTotalVotes()
         }
         else if(lastButtonPressed == "3"){
-            var toIncrement = (thirdChoiceCounterLabel.text?.toInt())! + 1
+            let toIncrement = (Int(thirdChoiceCounterLabel.text!))! + 1
             thirdChoiceCounterLabel.text = String(toIncrement)
             updateNumberOfVotesForLetter("C")
             updateNumberOfTotalVotes()
         }
         else{
-            var toIncrement = (fourthChoiceCounterLabel.text?.toInt())! + 1
+            let toIncrement = (Int(fourthChoiceCounterLabel.text!))! + 1
             fourthChoiceCounterLabel.text = String(toIncrement)
             updateNumberOfVotesForLetter("D")
             updateNumberOfTotalVotes()
@@ -283,18 +285,18 @@ class VotingViewController: UIViewController {
         fourthChoiceButton.backgroundColor = UIColor(white: 0.67, alpha: 1.0)
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    /*override*/ func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         resetLastButtonColor()
         lastButtonPressed = ""
     }
     
-    //Currently there is a memory leak here cuz I keep creating new rootViewControllers
+    //Currently no need for this
     func backButtonPressed(sender :AnyObject){
         //self.dismissViewControllerAnimated(true, completion: nil)
-        var storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        var rootViewController : RootViewController = storyboard.instantiateViewControllerWithIdentifier("RootViewController") as! RootViewController
-        rootViewController.goToClassroom()
-        UIApplication.sharedApplication().keyWindow?.rootViewController = rootViewController
+//        var storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        var rootViewController : RootViewController = storyboard.instantiateViewControllerWithIdentifier("RootViewController") as! RootViewController
+//        rootViewController.goToClassroom()
+//        UIApplication.sharedApplication().keyWindow?.rootViewController = rootViewController
         //classroomView is using a fake data, the 'nil' below should be changed to real data in the future
 //        var classroomView : LessonMenuView = LessonMenuView(frame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height),andData : rootViewController.lessonsRecord)
 //        self.view.addSubview(classroomView)
@@ -308,12 +310,12 @@ class VotingViewController: UIViewController {
     }
     
     func resizeAllBarLabels(){
-        println("Resize all bar labels done")
-        var newFirstBarHeight = calculateNewBarHeight(firstChoiceCounterLabel.text!)
-        var choiceButtonWidth = screenSize.width * 0.25
-        var newSecondBarHeight = calculateNewBarHeight(secondChoiceCounterLabel.text!)
-        var newThirdBarHeight = calculateNewBarHeight(thirdChoiceCounterLabel.text!)
-        var newFourthBarHeight = calculateNewBarHeight(fourthChoiceCounterLabel.text!)
+        print("Resize all bar labels done")
+        let newFirstBarHeight = calculateNewBarHeight(firstChoiceCounterLabel.text!)
+        let choiceButtonWidth = screenSize.width * 0.25
+        let newSecondBarHeight = calculateNewBarHeight(secondChoiceCounterLabel.text!)
+        let newThirdBarHeight = calculateNewBarHeight(thirdChoiceCounterLabel.text!)
+        let newFourthBarHeight = calculateNewBarHeight(fourthChoiceCounterLabel.text!)
 
             if(!newFirstBarHeight.isNaN ){
                 UIView.animateWithDuration(0.2 , animations: {
@@ -347,7 +349,7 @@ class VotingViewController: UIViewController {
     func calculateNewBarHeight(numberOfVotes: String) -> CGFloat{
         var newBarHeight : CGFloat = 0
         if let n = NSNumberFormatter().numberFromString(numberOfVotes) {
-            var numberOfVotes = CGFloat(n)
+            let numberOfVotes = CGFloat(n)
             //println(numberOfVotes)
             if(currentNumberOfVotes != 0){
                 newBarHeight = (numberOfVotes/currentNumberOfVotes) * (screenSize.height * 0.50)
