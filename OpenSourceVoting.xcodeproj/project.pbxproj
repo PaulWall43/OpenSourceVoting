@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		39535EC8617ECEEAF34F8534 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0230DEB836ABA5604F903786 /* libPods.a */; };
+		7172B57D1C44E79B00C574DE /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7172B57C1C44E79B00C574DE /* Firebase.framework */; };
 		719499091C40733100968504 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719499081C40733100968504 /* AppDelegate.swift */; };
 		7194990B1C40733100968504 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194990A1C40733100968504 /* ViewController.swift */; };
 		7194990E1C40733100968504 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7194990C1C40733100968504 /* Main.storyboard */; };
@@ -38,6 +39,8 @@
 /* Begin PBXFileReference section */
 		0230DEB836ABA5604F903786 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		467F7F1FA39ECFE542D7CEE4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7172B57B1C44E63500C574DE /* SwiftBeacon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftBeacon-Bridging-Header.h"; sourceTree = "<group>"; };
+		7172B57C1C44E79B00C574DE /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = OpenSourceVoting/Firebase.framework; sourceTree = "<group>"; };
 		719499051C40733100968504 /* OpenSourceVoting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSourceVoting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		719499081C40733100968504 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7194990A1C40733100968504 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39535EC8617ECEEAF34F8534 /* libPods.a in Frameworks */,
+				7172B57D1C44E79B00C574DE /* Firebase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +97,7 @@
 		719498FC1C40733100968504 = {
 			isa = PBXGroup;
 			children = (
+				7172B57C1C44E79B00C574DE /* Firebase.framework */,
 				719499071C40733100968504 /* OpenSourceVoting */,
 				7194991C1C40733200968504 /* OpenSourceVotingTests */,
 				719499271C40733200968504 /* OpenSourceVotingUITests */,
@@ -118,6 +123,7 @@
 				719499081C40733100968504 /* AppDelegate.swift */,
 				7194990A1C40733100968504 /* ViewController.swift */,
 				719499361C4073E600968504 /* VotingViewController.swift */,
+				7172B57B1C44E63500C574DE /* SwiftBeacon-Bridging-Header.h */,
 				7194990C1C40733100968504 /* Main.storyboard */,
 				7194990F1C40733100968504 /* Assets.xcassets */,
 				719499111C40733100968504 /* LaunchScreen.storyboard */,
@@ -482,6 +488,10 @@
 			baseConfigurationReference = 467F7F1FA39ECFE542D7CEE4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OpenSourceVoting",
+				);
 				INFOPLIST_FILE = OpenSourceVoting/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pw.OpenSourceVoting;
@@ -494,6 +504,10 @@
 			baseConfigurationReference = E002A6A3FB935C058552D6A9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OpenSourceVoting",
+				);
 				INFOPLIST_FILE = OpenSourceVoting/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pw.OpenSourceVoting;
