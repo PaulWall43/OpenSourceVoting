@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Paul Wallace. All rights reserved.
 //
 
+import Firebase
 import UIKit
+
 
 class VotingViewController: UIViewController {
 
