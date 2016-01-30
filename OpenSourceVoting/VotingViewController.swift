@@ -7,11 +7,9 @@
 //
 
 import UIKit
-import Firebase
-
 class VotingViewController: UIViewController {
 
-    var firebaseRef : Firebase = Firebase(url: "https://tetheref.firebaseio.com/ClassSessions")
+    //var firebaseRef : Firebase = Firebase(url: "https://tetheref.firebaseio.com/ClassSessions")
     //var currentStateInfo : CurrentStateInformationObject = CurrentStateInformationObject.SharedInstance
     var studentCounterLabel: UILabel!
     var submitVoteButton: UIButton!
@@ -41,8 +39,8 @@ class VotingViewController: UIViewController {
         //calculate orginal percent incrase
         currentNumberOfVotes = 0
         //Add navigation items
-        var backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "backButtonPressed:")
-        var resetButton = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: "resetClassDatabaseVotes:")
+        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "backButtonPressed:")
+        let resetButton = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: "resetClassDatabaseVotes:")
         //var backButton = UIBarButtonItem()
         self.navigationItem.setLeftBarButtonItem(backButton, animated: true)
         self.navigationItem.setRightBarButtonItem(resetButton, animated: true)
@@ -102,6 +100,9 @@ class VotingViewController: UIViewController {
 //                submitVoteButton.addTarget(self, action: "clickedSubmitVoteButton:", forControlEvents: UIControlEvents.TouchUpInside)
 //            }
         submitVoteButton.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 17)
+        submitVoteButton.setTitle("Submit Vote", forState: UIControlState.Normal)
+        submitVoteButton.addTarget(self, action: "clickedSubmitVoteButton:", forControlEvents: UIControlEvents.TouchUpInside)
+
 //        println(UIApplication.sharedApplication().keyWindow?.rootViewController)
 //        submitVoteButton = UIButton(frame: CGRect(x: 0, y: submitButtonPlace, width: screenSize.width, height: choiceButtonHeight))
 //
@@ -178,20 +179,20 @@ class VotingViewController: UIViewController {
         self.view.bringSubviewToFront(fourthChoiceCounterLabel)
         //set up live updates
         // Read data and react to changes
-        var updateRemoteRef = firebaseRef.childByAppendingPath("\(currentStateInfo.currentClassTitle)/voting")
-        updateRemoteRef.observeEventType(.Value, withBlock: { snapshot in
-                var a  = snapshot.value["A"] as! Int
-                self.firstChoiceCounterLabel.text = String(a)
-                var b = snapshot.value["B"] as! Int
-                self.secondChoiceCounterLabel.text = String(b)
-                var c = snapshot.value["C"] as! Int
-                self.thirdChoiceCounterLabel.text = String(c)
-                var d = snapshot.value["D"] as! Int
-                self.fourthChoiceCounterLabel.text = String(d)
-                var e = snapshot.value["numberOfVotes"] as! CGFloat
-                self.currentNumberOfVotes = e
-                self.resizeAllBarLabels()
-            })
+//        var updateRemoteRef = firebaseRef.childByAppendingPath("\(currentStateInfo.currentClassTitle)/voting")
+//        updateRemoteRef.observeEventType(.Value, withBlock: { snapshot in
+//                var a  = snapshot.value["A"] as! Int
+//                self.firstChoiceCounterLabel.text = String(a)
+//                var b = snapshot.value["B"] as! Int
+//                self.secondChoiceCounterLabel.text = String(b)
+//                var c = snapshot.value["C"] as! Int
+//                self.thirdChoiceCounterLabel.text = String(c)
+//                var d = snapshot.value["D"] as! Int
+//                self.fourthChoiceCounterLabel.text = String(d)
+//                var e = snapshot.value["numberOfVotes"] as! CGFloat
+//                self.currentNumberOfVotes = e
+//                self.resizeAllBarLabels()
+//            })
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -286,7 +287,7 @@ class VotingViewController: UIViewController {
         fourthChoiceButton.backgroundColor = UIColor(white: 0.67, alpha: 1.0)
     }
     
-    /*override*/ func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         resetLastButtonColor()
         lastButtonPressed = ""
     }
@@ -363,52 +364,52 @@ class VotingViewController: UIViewController {
     }
     
     func resetClassDatabaseVotes(sender:AnyObject){
-        var resetAlert : UIAlertController = UIAlertController(title: "Warning", message: "Are you sure you want to reset?", preferredStyle: UIAlertControllerStyle.Alert)
-        var defaultAction : UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
-            action in
-            var votingRef = self.firebaseRef.childByAppendingPath("\(self.currentStateInfo.currentClassTitle)/voting")
-            votingRef.updateChildValues(["A" : 0])
-            votingRef.updateChildValues(["B" : 0])
-            votingRef.updateChildValues(["C" : 0])
-            votingRef.updateChildValues(["D" : 0])
-            votingRef.updateChildValues(["numberOfVotes" : 0])
-        })
-        var oopsAction : UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
-            action in
-            return
-        })
-        resetAlert.addAction(defaultAction)
-        resetAlert.addAction(oopsAction)
-        self.presentViewController(resetAlert, animated: true, completion: nil)
+//        var resetAlert : UIAlertController = UIAlertController(title: "Warning", message: "Are you sure you want to reset?", preferredStyle: UIAlertControllerStyle.Alert)
+//        var defaultAction : UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
+//            action in
+//            var votingRef = self.firebaseRef.childByAppendingPath("\(self.currentStateInfo.currentClassTitle)/voting")
+//            votingRef.updateChildValues(["A" : 0])
+//            votingRef.updateChildValues(["B" : 0])
+//            votingRef.updateChildValues(["C" : 0])
+//            votingRef.updateChildValues(["D" : 0])
+//            votingRef.updateChildValues(["numberOfVotes" : 0])
+//        })
+//        var oopsAction : UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+//            action in
+//            return
+//        })
+//        resetAlert.addAction(defaultAction)
+//        resetAlert.addAction(oopsAction)
+//        self.presentViewController(resetAlert, animated: true, completion: nil)
         //Learn how tos et all children to 0 at once
 
     }
     
     func updateNumberOfVotesForLetter(letterToIncrement:String){
-        var votesRef = firebaseRef.childByAppendingPath("\(self.currentStateInfo.currentClassTitle)/voting/\(letterToIncrement)")
-        votesRef.runTransactionBlock({
-            (currentData:FMutableData!) in
-            var value = currentData.value as? Int
-            if !(value != nil) {
-                value = 0
-            }
-            currentData.value = value! + 1
-            return FTransactionResult.successWithValue(currentData)
-        })
+//        var votesRef = firebaseRef.childByAppendingPath("\(self.currentStateInfo.currentClassTitle)/voting/\(letterToIncrement)")
+//        votesRef.runTransactionBlock({
+//            (currentData:FMutableData!) in
+//            var value = currentData.value as? Int
+//            if !(value != nil) {
+//                value = 0
+//            }
+//            currentData.value = value! + 1
+//            return FTransactionResult.successWithValue(currentData)
+//        })
     }
     
     func updateNumberOfTotalVotes(){
-        var numberOfVotesRef = firebaseRef.childByAppendingPath("\(self.currentStateInfo.currentClassTitle)/voting/numberOfVotes")
-        numberOfVotesRef.runTransactionBlock({
-            (currentData:FMutableData!) in
-            var value = currentData.value as? Int
-            if !(value != nil) {
-                value = 0
-            }
-            currentData.value = value! + 1
-            self.currentNumberOfVotes = currentData.value as! CGFloat
-            return FTransactionResult.successWithValue(currentData)
-        })
+//        var numberOfVotesRef = firebaseRef.childByAppendingPath("\(self.currentStateInfo.currentClassTitle)/voting/numberOfVotes")
+//        numberOfVotesRef.runTransactionBlock({
+//            (currentData:FMutableData!) in
+//            var value = currentData.value as? Int
+//            if !(value != nil) {
+//                value = 0
+//            }
+//            currentData.value = value! + 1
+//            self.currentNumberOfVotes = currentData.value as! CGFloat
+//            return FTransactionResult.successWithValue(currentData)
+//        })
     }
     /*
     // MARK: - Navigation
