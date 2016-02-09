@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		713A0D2D1C69AF2F00735D43 /* VotingViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713A0D2C1C69AF2F00735D43 /* VotingViewController2.swift */; };
 		719499091C40733100968504 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719499081C40733100968504 /* AppDelegate.swift */; };
 		7194990B1C40733100968504 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194990A1C40733100968504 /* ViewController.swift */; };
 		7194990E1C40733100968504 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7194990C1C40733100968504 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		713A0D2C1C69AF2F00735D43 /* VotingViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotingViewController2.swift; sourceTree = "<group>"; };
 		7172B57B1C44E63500C574DE /* SwiftBeacon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftBeacon-Bridging-Header.h"; sourceTree = "<group>"; };
 		719499051C40733100968504 /* OpenSourceVoting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSourceVoting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		719499081C40733100968504 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				719499081C40733100968504 /* AppDelegate.swift */,
 				7194990A1C40733100968504 /* ViewController.swift */,
 				719499361C4073E600968504 /* VotingViewController.swift */,
+				713A0D2C1C69AF2F00735D43 /* VotingViewController2.swift */,
 				7172B57B1C44E63500C574DE /* SwiftBeacon-Bridging-Header.h */,
 				7194990C1C40733100968504 /* Main.storyboard */,
 				7194990F1C40733100968504 /* Assets.xcassets */,
@@ -266,6 +269,7 @@
 			files = (
 				7194990B1C40733100968504 /* ViewController.swift in Sources */,
 				719499091C40733100968504 /* AppDelegate.swift in Sources */,
+				713A0D2D1C69AF2F00735D43 /* VotingViewController2.swift in Sources */,
 				719499371C4073E600968504 /* VotingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
