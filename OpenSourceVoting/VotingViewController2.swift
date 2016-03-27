@@ -61,9 +61,6 @@ class VotingViewController2: UIViewController {
             print(barsArray[i])
             barsArray[i].backgroundColor = barColorsArray[i]
             barsArray[i].minimumScaleFactor = 0.5
-            
-
-            
             view.addSubview(barsArray[i])
         }
         for i in 0...3{
