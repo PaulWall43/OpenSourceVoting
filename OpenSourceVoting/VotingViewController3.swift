@@ -6,6 +6,8 @@
 //  Copyright © 2016 PaulWallace. All rights reserved.
 //
 
+//HOW CAN I USE NUM'S HERE POSSIBLY
+
 import UIKit
 
 //I want this class to be the real open source class that people will use
@@ -40,7 +42,7 @@ var SUBMIT_BUTTON_LOC = SCREEN_SIZE.height * SUBMIT_BUTTON_LOC_PROPORTION
 //let SUBMIT_BUTTON_HEIGHT = SELECT_BUTTON_HEIGHT // Not currently used, can be used for further customization
 
 
-class VotingViewController3: UIViewController {
+class VotingViewController3: UIViewController, VotingColumnDelegate {
     /**** Instance Variables ****/
     var prompt : String!
     var numAns : Int!
@@ -50,6 +52,8 @@ class VotingViewController3: UIViewController {
     var opColorArr : [UIColor]! //Colors for the different select buttons
     var votingColumnArr : [ColumnSpaceView] = []
     var submitVoteButton : UIButton = UIButton()
+    var lastColumnSelected : ColumnSpaceView?
+    var totalVotes : Int = 0
     
     /**** Contstructors ****/
     convenience init() {
@@ -93,7 +97,7 @@ class VotingViewController3: UIViewController {
 
         //calculate the numbers according to the parameters of the constructor
         //let selectButtonWidth = SCREEN_SIZE.width * CGFloat(1/numAns) //Could be a let
-        let selectButtonWidth = SCREEN_SIZE.width * 0.25
+        let selectButtonWidth = SCREEN_SIZE.width * CGFloat(1/CGFloat(numAns))
         //Add navigation components
         
         for i in 0...numAns - 1{
@@ -107,9 +111,10 @@ class VotingViewController3: UIViewController {
             //Configure the counter label for number of votes
             let counterLabel : UILabel = configureCounterLabel(selectButtonWidth, index: i)
             let columnSpaceView : ColumnSpaceView = configureColumnSpaceView(i, frame: columnFrame, votingBar: votingBar, selectButton: selectButton, counterLabel: counterLabel)
+            votingColumnArr.append(columnSpaceView)
             view.addSubview(columnSpaceView)
+            columnSpaceView.delegate = self
         }
-        
         //Submit Button
         submitVoteButton = configureSubmitVoteButton()
         view.addSubview(submitVoteButton)
@@ -122,9 +127,9 @@ class VotingViewController3: UIViewController {
     }
     
     func configureVotingBar(selectButtonWidth : CGFloat, index : Int) -> UILabel{
-        let tempVotingBar = UILabel(frame: CGRect(x: 0, y: SELECT_BUTTON_LOC, width: selectButtonWidth, height: 0))
+        let tempVotingBar = UILabel(frame: CGRectMake( 0, SELECT_BUTTON_LOC, selectButtonWidth, 0))
         tempVotingBar.backgroundColor = getAnsColorArr()[index]
-        tempVotingBar.minimumScaleFactor = 0.5 //What is this for??
+        //tempVotingBar.minimumScaleFactor = 0.5 //What is this for??
         return tempVotingBar
     }
     
@@ -137,9 +142,9 @@ class VotingViewController3: UIViewController {
     }
     
     func configureCounterLabel(selectButtonWidth : CGFloat, index : Int) -> UILabel{
-        let tempCounterLabel = UILabel(frame: CGRect(x: 0, y: SELECT_BUTTON_LOC - 20, width: selectButtonWidth, height: 20))
+        let tempCounterLabel = UILabel(frame: CGRectMake(0, SELECT_BUTTON_LOC - 20, selectButtonWidth, 20))
         tempCounterLabel.font = UIFont(name: FONT_NAME, size: 22)
-        tempCounterLabel.textColor = UIColor(white: 0.0, alpha: 1.0)
+        tempCounterLabel.textColor = UIColor.blackColor()//UIColor(white: 0.0, alpha: 1.0)
         tempCounterLabel.text = "0"
         tempCounterLabel.textAlignment = .Center
         return tempCounterLabel
@@ -160,15 +165,61 @@ class VotingViewController3: UIViewController {
     
     func configureSubmitVoteButton() -> UIButton{
         let toReturn = UIButton(frame: CGRect(x: 0, y: SUBMIT_BUTTON_LOC, width: SCREEN_SIZE.width, height: SELECT_BUTTON_HEIGHT))
-        toReturn.backgroundColor = UIColor(white: 0.20, alpha: 1)
+        toReturn.backgroundColor = UIColor(white: 0.20, alpha: 1)//UIColor.clearColor()//
         toReturn.titleLabel?.font = UIFont(name: FONT_NAME, size: 17)
         toReturn.setTitle("Submit Vote", forState: UIControlState.Normal)
+        toReturn.addTarget(self, action: #selector(VotingViewController3.voteSubmitted), forControlEvents: .TouchUpInside)
         return toReturn
     }
     
 
-    /****BUTTON DELEGATE METHODS****/
+    /****DELEGATE METHODS****/
+    func voteSubmitted() {
+        //implement here
+        if lastColumnSelected != nil {
+            lastColumnSelected?.numOfVotes += 1
+        }
+        totalVotes += 1
+        updateBarHeightsAndCount()
+    }
     
+    
+    //holdCol.getVotingBarFrame().minY - (newBarHeight - holdCol.getBarHeight())
+    func updateBarHeightsAndCount(){
+        for i in 0...votingColumnArr.count - 1{
+            let holdCol = votingColumnArr[i]
+            let newBarHeight = calcNewBarHeights(holdCol)
+            if(newBarHeight != holdCol.getBarHeight()){
+                let newFrame = CGRectMake(0, SCREEN_SIZE.height - newBarHeight - holdCol.getSelectButtonFrame().height - getSubmitVoteButtonFrame().height, holdCol.getVotingBarFrame().width, newBarHeight + holdCol.getSelectButtonFrame().height + getSubmitVoteButtonFrame().height)
+                UIView.animateWithDuration(0.2 , animations: {
+                    holdCol.setVotingBarFrame(newFrame)
+                })
+                
+                if holdCol == lastColumnSelected{
+                    holdCol.setCounterLabel()
+                }
+                
+                holdCol.setNewBarHeight(newBarHeight) //useless for now
+            }
+
+        }
+    }
+    
+    func calcNewBarHeights(column : ColumnSpaceView) -> CGFloat{
+        var newBarHeight : CGFloat = 0
+        if (totalVotes != 0){
+            newBarHeight = (CGFloat(column.getNumOfVotes())/CGFloat(totalVotes) * SCREEN_SIZE.height * 0.50)
+        }
+        if (newBarHeight > (SCREEN_SIZE.height * 0.50)){
+            newBarHeight = SCREEN_SIZE.height * 0.50
+        }
+        return newBarHeight
+    }
+    
+    func ansSelected(index: Int) {
+        lastColumnSelected = votingColumnArr[index]
+        print("\(votingColumnArr[index].selectButtonLabel.text) was selected")
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -203,6 +254,10 @@ class VotingViewController3: UIViewController {
     
     func getVotingColumnArr() -> [ColumnSpaceView]{
         return votingColumnArr
+    }
+    
+    func getSubmitVoteButtonFrame() -> CGRect{
+        return submitVoteButton.frame
     }
     
     /**** SETTERS ****/

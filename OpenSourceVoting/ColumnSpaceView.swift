@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ColumnSpaceView: UIView {
+class ColumnSpaceView: UIView, VotingColumn {
 
     
     var selfIndex : Int!
@@ -16,8 +16,10 @@ class ColumnSpaceView: UIView {
     var selectButton : UIButton!
     var selectButtonLabel : UILabel!
     var counterLabel : UILabel!
-    var barHeight = 0
+    var barHeight : CGFloat = 0
     var numOfVotes = 0
+    
+    var delegate: VotingColumnDelegate?
     
     
     
@@ -32,7 +34,7 @@ class ColumnSpaceView: UIView {
         self.votingBar = votingBar
         self.selectButton = selectButton
         self.counterLabel = counterLabel
-        
+        self.selectButtonLabel = selectButton.titleLabel
         
         //give button a delegate method
         selectButton.addTarget(self, action: #selector(ColumnSpaceView.selectButtonPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
@@ -42,8 +44,32 @@ class ColumnSpaceView: UIView {
         self.addSubview(selectButton)
         self.addSubview(counterLabel)
         self.bringSubviewToFront(selectButton)
-        
         self.backgroundColor = UIColor.whiteColor()
+    }
+    
+    func getVotingBarFrame() -> CGRect{
+        return votingBar.frame
+    }
+    
+    func getSelectButtonFrame() -> CGRect{
+        return selectButton.frame
+    }
+    
+    func getBarHeight() -> CGFloat{
+        return self.barHeight
+    }
+    
+    
+    func setNewBarHeight(barHeight : CGFloat){
+        self.barHeight = barHeight
+    }
+    
+    func setVotingBarFrame(frame: CGRect){
+        votingBar.frame = frame
+    }
+    
+    func setCounterLabel(){
+        counterLabel.text = String(numOfVotes)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,8 +77,11 @@ class ColumnSpaceView: UIView {
     }
     
     func selectButtonPressed(sender: AnyObject){
-        print(numOfVotes)
-        numOfVotes += 1
+        delegate?.ansSelected(self.selfIndex)
+    }
+    
+    func getNumOfVotes() -> Int {
+        return numOfVotes
     }
     
     /*
@@ -63,4 +92,15 @@ class ColumnSpaceView: UIView {
     }
     */
 
+}
+
+protocol VotingColumn {
+    var numOfVotes : Int { get }
+    func selectButtonPressed(sender: AnyObject)
+}
+
+protocol VotingColumnDelegate {
+    func ansSelected(index: Int) //not necessarily voted yet
+    func voteSubmitted()
+    func updateBarHeightsAndCount()
 }
