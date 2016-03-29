@@ -59,6 +59,13 @@ class ColumnSpaceView: UIView, VotingColumn {
         return self.barHeight
     }
     
+    func getIndex() -> Int{
+        return self.selfIndex
+    }
+    
+    func setSelectButtonColor(color: UIColor){
+        selectButton.backgroundColor = color
+    }
     
     func setNewBarHeight(barHeight : CGFloat){
         self.barHeight = barHeight

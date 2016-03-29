@@ -22,6 +22,7 @@ let BLUE = UIColor(hue: 0.56, saturation: 0.76, brightness: 0.86, alpha: 1.0)
 let PURPLE = UIColor(hue: 0.786, saturation: 0.51, brightness: 0.71, alpha: 1.0)
 let YELLOW = UIColor(hue: 0.133, saturation: 0.94, brightness: 0.95, alpha: 1.0)
 let GREEN = UIColor(hue: 0.402, saturation: 0.78, brightness: 0.68, alpha: 1.0)
+let SELECTED_GRAY = UIColor(white: 0.67, alpha: 1.0)
 
 let DEFAULT_PROMPT = "Set a prompt here"
 let DEFAULT_NUM_ANS = 4
@@ -217,8 +218,12 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
     }
     
     func ansSelected(index: Int) {
+        if(lastColumnSelected != nil){
+            lastColumnSelected?.setSelectButtonColor(opColorArr[(lastColumnSelected?.getIndex())!])
+        }
         lastColumnSelected = votingColumnArr[index]
-        print("\(votingColumnArr[index].selectButtonLabel.text) was selected")
+        
+        lastColumnSelected!.setSelectButtonColor(SELECTED_GRAY)
     }
     
     
