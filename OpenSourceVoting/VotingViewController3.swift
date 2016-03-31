@@ -15,7 +15,9 @@ import UIKit
 
 let SCREEN_SIZE: CGRect = UIScreen.mainScreen().bounds
 
-let FONT_NAME = "ArialRoundedMTBold"
+let FONT_NAME_BOLD = "ArialRoundedMTBold"
+
+let FONT_NAME = "ArialRoundedMT"
 
 let RED = UIColor(hue: 0.025, saturation: 0.72, brightness: 0.84, alpha: 1.0)
 let BLUE = UIColor(hue: 0.56, saturation: 0.76, brightness: 0.86, alpha: 1.0)
@@ -23,8 +25,10 @@ let PURPLE = UIColor(hue: 0.786, saturation: 0.51, brightness: 0.71, alpha: 1.0)
 let YELLOW = UIColor(hue: 0.133, saturation: 0.94, brightness: 0.95, alpha: 1.0)
 let GREEN = UIColor(hue: 0.402, saturation: 0.78, brightness: 0.68, alpha: 1.0)
 let SELECTED_GRAY = UIColor(white: 0.67, alpha: 1.0)
+let SUBMIT_VOTE_BUTTON_COLOR = UIColor(white: 0.20, alpha: 1.0)
+let PROMPT_LABEL_COLOR = UIColor(white: 0.95, alpha: 1.0)
 
-let DEFAULT_PROMPT = "Set a prompt here"
+let DEFAULT_PROMPT = "What is the best method for traversing a tree in order to delete all the nodes in the tree and prevent memory leaks?"
 let DEFAULT_NUM_ANS = 4
 let DEFAULT_NUM_TIME = 5.00
 let DEFAULT_ANS_STRING_ARR = ["A", "B", "C", "D"]
@@ -32,12 +36,13 @@ let DEFAULT_ANS_COLOR_ARR = [RED, BLUE, PURPLE, YELLOW]
 let DEFAULT_OP_COLOR_ARR = [GREEN, GREEN, GREEN, GREEN]
 
 let SELECT_BUTTON_HEIGHT_PROPORTION : CGFloat = 0.125
-let SUBMUT_BUTTON_HIEGHT_PROPORTION : CGFloat = 0.125
 let SELECT_BUTTON_LOC_PROPORTION : CGFloat = 0.75
+let SUBMUT_BUTTON_HIEGHT_PROPORTION : CGFloat = 0.125
 let SUBMIT_BUTTON_LOC_PROPORTION : CGFloat = 0.875
 
 let SELECT_BUTTON_HEIGHT = SCREEN_SIZE.height * SELECT_BUTTON_HEIGHT_PROPORTION
 var SELECT_BUTTON_LOC = SCREEN_SIZE.height * SELECT_BUTTON_LOC_PROPORTION
+let SUBMIT_BUTTON_HEIGHT = SCREEN_SIZE.height * SUBMUT_BUTTON_HIEGHT_PROPORTION
 var SUBMIT_BUTTON_LOC = SCREEN_SIZE.height * SUBMIT_BUTTON_LOC_PROPORTION
 
 //let SUBMIT_BUTTON_HEIGHT = SELECT_BUTTON_HEIGHT // Not currently used, can be used for further customization
@@ -52,6 +57,7 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
     var ansColorArr : [UIColor]! //Colors for the voting bars
     var opColorArr : [UIColor]! //Colors for the different select buttons
     var votingColumnArr : [ColumnSpaceView] = []
+    var promptLabel : UILabel!
     var submitVoteButton : UIButton = UIButton()
     var lastColumnSelected : ColumnSpaceView?
     var totalVotes : Int = 0
@@ -116,8 +122,12 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
             view.addSubview(columnSpaceView)
             columnSpaceView.delegate = self
         }
+        //Prompt Label
+        self.promptLabel = configurePromptLabel(self.getPrompt()) //prompt should be passed in
+        view.addSubview(promptLabel)
+        
         //Submit Button
-        submitVoteButton = configureSubmitVoteButton()
+        self.submitVoteButton = configureSubmitVoteButton()
         view.addSubview(submitVoteButton)
         
     }
@@ -136,7 +146,7 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
     
     func configureSelectButton(selectButtonWidth : CGFloat, index : Int) -> UIButton{
         let tempSelectButton = UIButton(frame: CGRectMake(0, SELECT_BUTTON_LOC, selectButtonWidth, SELECT_BUTTON_HEIGHT))
-        tempSelectButton.titleLabel?.font = UIFont(name: FONT_NAME, size: 22)
+        tempSelectButton.titleLabel?.font = UIFont(name: FONT_NAME_BOLD, size: 22)
         tempSelectButton.setTitle(getAnsStringArr()[index], forState: .Normal) //Make getters setters
         tempSelectButton.backgroundColor = getOpColorArr()[index]
         return tempSelectButton
@@ -144,7 +154,7 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
     
     func configureCounterLabel(selectButtonWidth : CGFloat, index : Int) -> UILabel{
         let tempCounterLabel = UILabel(frame: CGRectMake(0, SELECT_BUTTON_LOC - 20, selectButtonWidth, 20))
-        tempCounterLabel.font = UIFont(name: FONT_NAME, size: 22)
+        tempCounterLabel.font = UIFont(name: FONT_NAME_BOLD, size: 22)
         tempCounterLabel.textColor = UIColor.blackColor()//UIColor(white: 0.0, alpha: 1.0)
         tempCounterLabel.text = "0"
         tempCounterLabel.textAlignment = .Center
@@ -164,10 +174,25 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
         
     }
     
+    func configurePromptLabel(prompt: String) -> UILabel{
+        let tempPromptLabel = UILabel(frame: CGRectMake(0, 20, SCREEN_SIZE.width, SCREEN_SIZE.height - ((SCREEN_SIZE.height * 0.50) + SUBMIT_BUTTON_HEIGHT + SELECT_BUTTON_HEIGHT + 20))) //kinda weird numbers here, there should be a constant for submitVoteButton
+//        print (SCREEN_SIZE.height * 0.50)
+//        print (SELECT_BUTTON_HEIGHT)
+//        print (SUBMIT_BUTTON_HEIGHT)
+        tempPromptLabel.backgroundColor = PROMPT_LABEL_COLOR
+        tempPromptLabel.text = prompt
+        tempPromptLabel.font = UIFont(name: FONT_NAME, size: 17)
+        tempPromptLabel.textAlignment = .Center
+        tempPromptLabel.numberOfLines = 0
+        tempPromptLabel.layer.borderColor = SUBMIT_VOTE_BUTTON_COLOR.CGColor
+        tempPromptLabel.layer.borderWidth = 1.0
+        return tempPromptLabel
+    }
+    
     func configureSubmitVoteButton() -> UIButton{
         let toReturn = UIButton(frame: CGRect(x: 0, y: SUBMIT_BUTTON_LOC, width: SCREEN_SIZE.width, height: SELECT_BUTTON_HEIGHT))
-        toReturn.backgroundColor = UIColor(white: 0.20, alpha: 1)//UIColor.clearColor()//
-        toReturn.titleLabel?.font = UIFont(name: FONT_NAME, size: 17)
+        toReturn.backgroundColor = SUBMIT_VOTE_BUTTON_COLOR//UIColor.clearColor()//
+        toReturn.titleLabel?.font = UIFont(name: FONT_NAME_BOLD, size: 17)
         toReturn.setTitle("Submit Vote", forState: UIControlState.Normal)
         toReturn.addTarget(self, action: #selector(VotingViewController3.voteSubmitted), forControlEvents: .TouchUpInside)
         return toReturn
@@ -192,17 +217,18 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
             let newBarHeight = calcNewBarHeights(holdCol)
             if(newBarHeight != holdCol.getBarHeight()){
                 let newFrame = CGRectMake(0, SCREEN_SIZE.height - newBarHeight - holdCol.getSelectButtonFrame().height - getSubmitVoteButtonFrame().height, holdCol.getVotingBarFrame().width, newBarHeight + holdCol.getSelectButtonFrame().height + getSubmitVoteButtonFrame().height)
+                
+//                print ("HEY: \(holdCol.getSelectButtonFrame().height)")
+//                print ("HEY: \(newBarHeight)")
+//                print ("HEY: \(getSubmitVoteButtonFrame().height)")
                 UIView.animateWithDuration(0.2 , animations: {
                     holdCol.setVotingBarFrame(newFrame)
                 })
-                
                 if holdCol == lastColumnSelected{
                     holdCol.setCounterLabel()
                 }
-                
                 holdCol.setNewBarHeight(newBarHeight) //useless for now
             }
-
         }
     }
     
