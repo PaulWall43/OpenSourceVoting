@@ -18,6 +18,7 @@
 		7194991E1C40733200968504 /* OpenSourceVotingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194991D1C40733200968504 /* OpenSourceVotingTests.swift */; };
 		719499291C40733200968504 /* OpenSourceVotingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719499281C40733200968504 /* OpenSourceVotingUITests.swift */; };
 		719499371C4073E600968504 /* VotingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719499361C4073E600968504 /* VotingViewController.swift */; };
+		71AED7981CADF1B5004E46A1 /* VotingPromptModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AED7971CADF1B5004E46A1 /* VotingPromptModuleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		719499281C40733200968504 /* OpenSourceVotingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceVotingUITests.swift; sourceTree = "<group>"; };
 		7194992A1C40733200968504 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		719499361C4073E600968504 /* VotingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotingViewController.swift; sourceTree = "<group>"; };
+		71AED7971CADF1B5004E46A1 /* VotingPromptModuleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotingPromptModuleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				719499361C4073E600968504 /* VotingViewController.swift */,
 				713A0D2C1C69AF2F00735D43 /* VotingViewController2.swift */,
 				7104EE1F1CA4B7D50097750E /* VotingViewController3.swift */,
+				71AED7971CADF1B5004E46A1 /* VotingPromptModuleView.swift */,
 				7104EE211CA837880097750E /* ColumnSpaceView.swift */,
 				7172B57B1C44E63500C574DE /* SwiftBeacon-Bridging-Header.h */,
 				7194990C1C40733100968504 /* Main.storyboard */,
@@ -279,6 +282,7 @@
 				7104EE221CA837880097750E /* ColumnSpaceView.swift in Sources */,
 				7104EE201CA4B7D50097750E /* VotingViewController3.swift in Sources */,
 				719499371C4073E600968504 /* VotingViewController.swift in Sources */,
+				71AED7981CADF1B5004E46A1 /* VotingPromptModuleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

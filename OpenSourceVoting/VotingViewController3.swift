@@ -6,7 +6,7 @@
 //  Copyright © 2016 PaulWallace. All rights reserved.
 //
 
-//HOW CAN I USE NUM'S HERE POSSIBLY
+//HOW CAN I USE ENUM'S HERE POSSIBLY
 
 import UIKit
 
@@ -40,12 +40,12 @@ let SELECT_BUTTON_LOC_PROPORTION : CGFloat = 0.75
 let SUBMUT_BUTTON_HIEGHT_PROPORTION : CGFloat = 0.125
 let SUBMIT_BUTTON_LOC_PROPORTION : CGFloat = 0.875
 
+let MAX_BAR_HEIGHT_PROP : CGFloat = 0.30
+
 let SELECT_BUTTON_HEIGHT = SCREEN_SIZE.height * SELECT_BUTTON_HEIGHT_PROPORTION
 var SELECT_BUTTON_LOC = SCREEN_SIZE.height * SELECT_BUTTON_LOC_PROPORTION
 let SUBMIT_BUTTON_HEIGHT = SCREEN_SIZE.height * SUBMUT_BUTTON_HIEGHT_PROPORTION
 var SUBMIT_BUTTON_LOC = SCREEN_SIZE.height * SUBMIT_BUTTON_LOC_PROPORTION
-
-//let SUBMIT_BUTTON_HEIGHT = SELECT_BUTTON_HEIGHT // Not currently used, can be used for further customization
 
 
 class VotingViewController3: UIViewController, VotingColumnDelegate {
@@ -57,10 +57,18 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
     var ansColorArr : [UIColor]! //Colors for the voting bars
     var opColorArr : [UIColor]! //Colors for the different select buttons
     var votingColumnArr : [ColumnSpaceView] = []
-    var promptLabel : UILabel!
+    
+    var votingPromptModule : VotingPromptModuleView!
+    
+    
+    var promptLabel : UILabel! //WILL BE DEPRECATED
     var submitVoteButton : UIButton = UIButton()
+    
     var lastColumnSelected : ColumnSpaceView?
     var totalVotes : Int = 0
+    
+    
+    //WILL ADD A VOTINGMODULE INSTANCE VARIABLE TO THE PROTOCOL AND THIS CLASS TO TAKE OUT ALL THIS IMPLEMENTATION
     
     /**** Contstructors ****/
     convenience init() {
@@ -81,7 +89,6 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
         self.ansStringArr = ansStringArr
         self.ansColorArr = ansColorArr
         self.opColorArr = opColorArr
-        
         
         //either use loadView or viewDidLoad (will use viewDidLoad)
     }
@@ -122,9 +129,15 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
             view.addSubview(columnSpaceView)
             columnSpaceView.delegate = self
         }
-        //Prompt Label
-        self.promptLabel = configurePromptLabel(self.getPrompt()) //prompt should be passed in
-        view.addSubview(promptLabel)
+        //Prompt Label (DEPRECATED)
+//        self.promptLabel = configurePromptLabel(self.getPrompt()) //prompt should be passed in
+//        view.addSubview(promptLabel)
+        
+        
+        //VotingPromptModule
+        let votingPromptModuleFrame = CGRectMake(0, 20, SCREEN_SIZE.width, SCREEN_SIZE.height - ((SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP) + SUBMIT_BUTTON_HEIGHT + SELECT_BUTTON_HEIGHT + 20))
+        self.votingPromptModule = VotingPromptModuleView(promptString: self.getPrompt(), frame: votingPromptModuleFrame)
+        view.addSubview(votingPromptModule)
         
         //Submit Button
         self.submitVoteButton = configureSubmitVoteButton()
@@ -174,6 +187,7 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
         
     }
     
+    //DEPRECATED
     func configurePromptLabel(prompt: String) -> UILabel{
         let tempPromptLabel = UILabel(frame: CGRectMake(0, 20, SCREEN_SIZE.width, SCREEN_SIZE.height - ((SCREEN_SIZE.height * 0.50) + SUBMIT_BUTTON_HEIGHT + SELECT_BUTTON_HEIGHT + 20))) //kinda weird numbers here, there should be a constant for submitVoteButton
 //        print (SCREEN_SIZE.height * 0.50)
@@ -185,7 +199,7 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
         tempPromptLabel.textAlignment = .Center
         tempPromptLabel.numberOfLines = 0
         tempPromptLabel.layer.borderColor = SUBMIT_VOTE_BUTTON_COLOR.CGColor
-        tempPromptLabel.layer.borderWidth = 1.0
+        tempPromptLabel.layer.borderWidth = 30.0
         return tempPromptLabel
     }
     
@@ -235,10 +249,10 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
     func calcNewBarHeights(column : ColumnSpaceView) -> CGFloat{
         var newBarHeight : CGFloat = 0
         if (totalVotes != 0){
-            newBarHeight = (CGFloat(column.getNumOfVotes())/CGFloat(totalVotes) * SCREEN_SIZE.height * 0.50)
+            newBarHeight = (CGFloat(column.getNumOfVotes())/CGFloat(totalVotes) * SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP)
         }
-        if (newBarHeight > (SCREEN_SIZE.height * 0.50)){
-            newBarHeight = SCREEN_SIZE.height * 0.50
+        if (newBarHeight > (SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP)){
+            newBarHeight = SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP
         }
         return newBarHeight
     }
