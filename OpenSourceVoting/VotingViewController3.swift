@@ -281,10 +281,10 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
     func calcNewBarHeights(column : ColumnSpaceView) -> CGFloat{
         var newBarHeight : CGFloat = 0
         if (totalVotes != 0){
-            newBarHeight = (CGFloat(column.getNumOfVotes())/CGFloat(totalVotes) * ((SCREEN_SIZE.height - navBarOffset) * MAX_BAR_HEIGHT_PROP))
+            newBarHeight = (CGFloat(column.getNumOfVotes())/CGFloat(totalVotes) * ((SCREEN_SIZE.height) * (MAX_BAR_HEIGHT_PROP - (navBarOffset/SCREEN_SIZE.height))))
         }
-        if (newBarHeight > ((SCREEN_SIZE.height) * MAX_BAR_HEIGHT_PROP)){
-            newBarHeight = (SCREEN_SIZE.height) * MAX_BAR_HEIGHT_PROP - navBarOffset
+        if (newBarHeight > ((SCREEN_SIZE.height) * (MAX_BAR_HEIGHT_PROP - (navBarOffset/SCREEN_SIZE.height)))){
+            newBarHeight = (SCREEN_SIZE.height) * (MAX_BAR_HEIGHT_PROP - (navBarOffset/SCREEN_SIZE.height))
         }
 //        if (newBarHeight - navBarOffset > 0){
 //            newBarHeight = newBarHeight - navBarOffset
