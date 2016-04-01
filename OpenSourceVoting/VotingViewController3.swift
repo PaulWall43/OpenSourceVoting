@@ -28,7 +28,7 @@ let SELECTED_GRAY = UIColor(white: 0.67, alpha: 1.0)
 let SUBMIT_VOTE_BUTTON_COLOR = UIColor(white: 0.20, alpha: 1.0)
 let PROMPT_LABEL_COLOR = UIColor(white: 0.95, alpha: 1.0)
 
-let DEFAULT_PROMPT = "What is the best method for traversing a tree in order to delete all the nodes in the tree and prevent memory leaks? What is the best method for traversing a tree in order to delete all the nodes in the tree and prevent memory leaks? What is the best method for traversing a tree in order to delete all the nodes in the tree and prevent memory leaks?"
+let DEFAULT_PROMPT = "What is the best method for traversing a tree in order to delete all the nodes in the tree and prevent memory leaks?"
 let DEFAULT_NUM_ANS = 4
 let DEFAULT_NUM_TIME = 5.00
 let DEFAULT_ANS_STRING_ARR = ["A", "B", "C", "D"]

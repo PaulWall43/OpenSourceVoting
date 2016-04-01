@@ -14,7 +14,7 @@ import UIKit
 let PROMPT_PADDING_LEFT : CGFloat = 0.05
 let PROMPT_PADDING_RIGHT : CGFloat = 0.05
 let PROMPT_PADDING_UP : CGFloat = 0.05
-let PROMPT_PADDING_DOWN : CGFloat = 0.05
+let PROMPT_PADDING_DOWN : CGFloat = 0.40
 
 class VotingPromptModuleView: UIView {
 
@@ -36,7 +36,7 @@ class VotingPromptModuleView: UIView {
     
     func constructLabel(promptString: String, frame: CGRect) -> UILabel{
         //construct the promptLabel
-        let tempPromptLabel = UILabel(frame: CGRectMake(frame.width * PROMPT_PADDING_LEFT, frame.height * PROMPT_PADDING_UP, frame.width * (CGFloat(1.0) - (PROMPT_PADDING_RIGHT * 2)), frame.height * (CGFloat(1.0) - (PROMPT_PADDING_DOWN * 2))))
+        let tempPromptLabel = UILabel(frame: CGRectMake(frame.width * PROMPT_PADDING_LEFT, frame.height * PROMPT_PADDING_UP, frame.width * (CGFloat(1.0) - (PROMPT_PADDING_RIGHT + PROMPT_PADDING_LEFT)), (frame.height) * (CGFloat(1.0) - (PROMPT_PADDING_DOWN + PROMPT_PADDING_UP))))
         tempPromptLabel.backgroundColor = PROMPT_LABEL_COLOR
         tempPromptLabel.text = promptString
         tempPromptLabel.textAlignment = .Center
