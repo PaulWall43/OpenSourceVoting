@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let viewController = storyBoard.instantiateViewControllerWithIdentifier("VotingViewController3") as! VotingViewController3
 //        self.window?.rootViewController = viewController
 //        self.window?.makeKeyAndVisible()
+        
+//        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         return true
     }
 
@@ -47,5 +49,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+class NavigationController: UINavigationController, UIViewControllerTransitioningDelegate {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Status bar white font
+        self.navigationBar.barTintColor = SUBMIT_VOTE_BUTTON_COLOR
+        self.navigationBar.barStyle = UIBarStyle.Black
+        self.navigationBar.tintColor = UIColor.whiteColor()
+    }
 }
 

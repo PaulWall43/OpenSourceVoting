@@ -41,6 +41,8 @@ class VotingPromptModuleView: UIView {
         tempPromptLabel.text = promptString
         tempPromptLabel.textAlignment = .Center
         tempPromptLabel.numberOfLines = 0
+        tempPromptLabel.minimumScaleFactor = 0.5
+        tempPromptLabel.adjustsFontSizeToFitWidth = true
         return tempPromptLabel
     }
     

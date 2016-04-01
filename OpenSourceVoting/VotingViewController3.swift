@@ -28,7 +28,7 @@ let SELECTED_GRAY = UIColor(white: 0.67, alpha: 1.0)
 let SUBMIT_VOTE_BUTTON_COLOR = UIColor(white: 0.20, alpha: 1.0)
 let PROMPT_LABEL_COLOR = UIColor(white: 0.95, alpha: 1.0)
 
-let DEFAULT_PROMPT = "What is the best method for traversing a tree in order to delete all the nodes in the tree and prevent memory leaks?"
+let DEFAULT_PROMPT = "What is the best method for traversing a tree in order to delete all the nodes in the tree and prevent memory leaks? What is the best method for traversing a tree in order to delete all the nodes in the tree and prevent memory leaks? What is the best method for traversing a tree in order to delete all the nodes in the tree and prevent memory leaks?"
 let DEFAULT_NUM_ANS = 4
 let DEFAULT_NUM_TIME = 5.00
 let DEFAULT_ANS_STRING_ARR = ["A", "B", "C", "D"]
@@ -40,12 +40,14 @@ let SELECT_BUTTON_LOC_PROPORTION : CGFloat = 0.75
 let SUBMUT_BUTTON_HIEGHT_PROPORTION : CGFloat = 0.125
 let SUBMIT_BUTTON_LOC_PROPORTION : CGFloat = 0.875
 
-let MAX_BAR_HEIGHT_PROP : CGFloat = 0.30
+let MAX_BAR_HEIGHT_PROP : CGFloat = 0.50
 
 let SELECT_BUTTON_HEIGHT = SCREEN_SIZE.height * SELECT_BUTTON_HEIGHT_PROPORTION
 var SELECT_BUTTON_LOC = SCREEN_SIZE.height * SELECT_BUTTON_LOC_PROPORTION
 let SUBMIT_BUTTON_HEIGHT = SCREEN_SIZE.height * SUBMUT_BUTTON_HIEGHT_PROPORTION
 var SUBMIT_BUTTON_LOC = SCREEN_SIZE.height * SUBMIT_BUTTON_LOC_PROPORTION
+
+let BAR_ANIMATE_TIME = 0.2
 
 
 class VotingViewController3: UIViewController, VotingColumnDelegate {
@@ -67,6 +69,8 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
     var lastColumnSelected : ColumnSpaceView?
     var totalVotes : Int = 0
     
+    var inNavigationStack : Bool = false
+    var navBarOffset : CGFloat!
     
     //WILL ADD A VOTINGMODULE INSTANCE VARIABLE TO THE PROTOCOL AND THIS CLASS TO TAKE OUT ALL THIS IMPLEMENTATION
     
@@ -90,6 +94,8 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
         self.ansColorArr = ansColorArr
         self.opColorArr = opColorArr
         
+        self.navBarOffset = 0
+        
         //either use loadView or viewDidLoad (will use viewDidLoad)
     }
     
@@ -102,7 +108,14 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nav = self.navigationController?.navigationBar
+        if nav != nil{
+            inNavigationStack = true
+            navBarOffset = self.navigationController?.navigationBar.frame.height
+        }
         self.constructVotingModule()
+        //Check for navigationBar
+
     }
 
     
@@ -135,8 +148,8 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
         
         
         //VotingPromptModule
-        let votingPromptModuleFrame = CGRectMake(0, 20, SCREEN_SIZE.width, SCREEN_SIZE.height - ((SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP) + SUBMIT_BUTTON_HEIGHT + SELECT_BUTTON_HEIGHT + 20))
-        self.votingPromptModule = VotingPromptModuleView(promptString: self.getPrompt(), frame: votingPromptModuleFrame)
+        //Check for navigation bar
+        let votingPromptModule = configureVotingPromptModule()
         view.addSubview(votingPromptModule)
         
         //Submit Button
@@ -203,6 +216,23 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
         return tempPromptLabel
     }
     
+    func configureVotingPromptModule() -> VotingPromptModuleView{
+        
+        let x : CGFloat = 0
+        var y : CGFloat = 20.0
+        let width = SCREEN_SIZE.width
+        let height = SCREEN_SIZE.height - ((SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP) + SUBMIT_BUTTON_HEIGHT + SELECT_BUTTON_HEIGHT + 20)
+        
+        if (inNavigationStack){ //I guess?
+            y = y + CGFloat((self.navigationController?.navigationBar.frame.height)!)
+        }
+        let tempFrame : CGRect = CGRectMake(x, y, width, height)
+        
+        //THIS IS CLASS SPECIFIC, ASSUMES CLASS HAS VOTINGPROMPTMODULE, CONSIDER REMOVING OR ADDING TO PROTOCOL
+        self.votingPromptModule = VotingPromptModuleView(promptString: self.getPrompt(), frame: tempFrame)
+        return self.votingPromptModule
+    }
+    
     func configureSubmitVoteButton() -> UIButton{
         let toReturn = UIButton(frame: CGRect(x: 0, y: SUBMIT_BUTTON_LOC, width: SCREEN_SIZE.width, height: SELECT_BUTTON_HEIGHT))
         toReturn.backgroundColor = SUBMIT_VOTE_BUTTON_COLOR//UIColor.clearColor()//
@@ -218,6 +248,8 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
         //implement here
         if lastColumnSelected != nil {
             lastColumnSelected?.numOfVotes += 1
+        } else {
+            
         }
         totalVotes += 1
         updateBarHeightsAndCount()
@@ -230,30 +262,33 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
             let holdCol = votingColumnArr[i]
             let newBarHeight = calcNewBarHeights(holdCol)
             if(newBarHeight != holdCol.getBarHeight()){
-                let newFrame = CGRectMake(0, SCREEN_SIZE.height - newBarHeight - holdCol.getSelectButtonFrame().height - getSubmitVoteButtonFrame().height, holdCol.getVotingBarFrame().width, newBarHeight + holdCol.getSelectButtonFrame().height + getSubmitVoteButtonFrame().height)
+                let newFrame = CGRectMake(0, (SCREEN_SIZE.height) - newBarHeight - holdCol.getSelectButtonFrame().height - getSubmitVoteButtonFrame().height, holdCol.getVotingBarFrame().width, newBarHeight + holdCol.getSelectButtonFrame().height + getSubmitVoteButtonFrame().height )
                 
 //                print ("HEY: \(holdCol.getSelectButtonFrame().height)")
 //                print ("HEY: \(newBarHeight)")
 //                print ("HEY: \(getSubmitVoteButtonFrame().height)")
-                UIView.animateWithDuration(0.2 , animations: {
+                UIView.animateWithDuration(BAR_ANIMATE_TIME , animations: {
                     holdCol.setVotingBarFrame(newFrame)
                 })
-                if holdCol == lastColumnSelected{
-                    holdCol.setCounterLabel()
-                }
-                holdCol.setNewBarHeight(newBarHeight) //useless for now
             }
+            if holdCol == lastColumnSelected{
+                holdCol.setCounterLabel()
+            }
+            holdCol.setNewBarHeight(newBarHeight) //useless for now
         }
     }
     
     func calcNewBarHeights(column : ColumnSpaceView) -> CGFloat{
         var newBarHeight : CGFloat = 0
         if (totalVotes != 0){
-            newBarHeight = (CGFloat(column.getNumOfVotes())/CGFloat(totalVotes) * SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP)
+            newBarHeight = (CGFloat(column.getNumOfVotes())/CGFloat(totalVotes) * ((SCREEN_SIZE.height - navBarOffset) * MAX_BAR_HEIGHT_PROP))
         }
-        if (newBarHeight > (SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP)){
-            newBarHeight = SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP
+        if (newBarHeight > ((SCREEN_SIZE.height) * MAX_BAR_HEIGHT_PROP)){
+            newBarHeight = (SCREEN_SIZE.height) * MAX_BAR_HEIGHT_PROP - navBarOffset
         }
+//        if (newBarHeight - navBarOffset > 0){
+//            newBarHeight = newBarHeight - navBarOffset
+//        }
         return newBarHeight
     }
     
