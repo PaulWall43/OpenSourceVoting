@@ -30,7 +30,7 @@ let PROMPT_LABEL_COLOR = UIColor(white: 0.95, alpha: 1.0)
 
 let DEFAULT_PROMPT = "What is the best method for traversing a tree in order to delete all the nodes in the tree and prevent memory leaks?"
 let DEFAULT_NUM_ANS = 4
-let DEFAULT_NUM_TIME = 5.00
+let DEFAULT_NUM_TIME = "1:00"
 let DEFAULT_ANS_STRING_ARR = ["A", "B", "C", "D"]
 let DEFAULT_ANS_COLOR_ARR = [RED, BLUE, PURPLE, YELLOW]
 let DEFAULT_OP_COLOR_ARR = [GREEN, GREEN, GREEN, GREEN]
@@ -54,7 +54,7 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
     /**** Instance Variables ****/
     var prompt : String!
     var numAns : Int!
-    var numTime : Double!
+    var numTime : String!
     var ansStringArr : [String]!
     var ansColorArr : [UIColor]! //Colors for the voting bars
     var opColorArr : [UIColor]! //Colors for the different select buttons
@@ -80,7 +80,7 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
 
     }
     
-    init(_ coder: NSCoder? = nil, prompt : String, numAns : Int, numTime : Double, ansStringArr : [String], ansColorArr : [UIColor], opColorArr : [UIColor]){
+    init(_ coder: NSCoder? = nil, prompt : String, numAns : Int, numTime : String, ansStringArr : [String], ansColorArr : [UIColor], opColorArr : [UIColor]){
         
         if let coder = coder{
             super.init(coder: coder)! //Seems like it works lol
@@ -229,7 +229,7 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
         let tempFrame : CGRect = CGRectMake(x, y, width, height)
         
         //THIS IS CLASS SPECIFIC, ASSUMES CLASS HAS VOTINGPROMPTMODULE, CONSIDER REMOVING OR ADDING TO PROTOCOL
-        self.votingPromptModule = VotingPromptModuleView(promptString: self.getPrompt(), frame: tempFrame)
+        self.votingPromptModule = VotingPromptModuleView(promptString: self.getPrompt(), frame: tempFrame, time: numTime)
         return self.votingPromptModule
     }
     
@@ -246,13 +246,18 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
     /****DELEGATE METHODS****/
     func voteSubmitted() {
         //implement here
+        if(votingPromptModule.isTimerInvalid()){
+            return //SHOULD PROVIDE SOME NOTIFICATION IN THE FUTURE
+        }
         if lastColumnSelected != nil {
             lastColumnSelected?.numOfVotes += 1
         } else {
             
         }
         totalVotes += 1
+        votingPromptModule.updateVoteTotalLabel(totalVotes)
         updateBarHeightsAndCount()
+        
     }
     
     
@@ -316,7 +321,7 @@ class VotingViewController3: UIViewController, VotingColumnDelegate {
         return numAns
     }
     
-    func getNumTime() -> Double{
+    func getNumTime() -> String{
         return numTime
     }
     
