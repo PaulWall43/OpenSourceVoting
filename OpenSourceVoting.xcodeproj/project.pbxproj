@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7104EE201CA4B7D50097750E /* VotingViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7104EE1F1CA4B7D50097750E /* VotingViewController3.swift */; };
 		7104EE221CA837880097750E /* ColumnSpaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7104EE211CA837880097750E /* ColumnSpaceView.swift */; };
+		712069EE1CB0D0DB006B3071 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712069ED1CB0D0DB006B3071 /* MenuView.swift */; };
 		713A0D2D1C69AF2F00735D43 /* VotingViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713A0D2C1C69AF2F00735D43 /* VotingViewController2.swift */; };
 		719499091C40733100968504 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719499081C40733100968504 /* AppDelegate.swift */; };
 		7194990B1C40733100968504 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194990A1C40733100968504 /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		7104EE1F1CA4B7D50097750E /* VotingViewController3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotingViewController3.swift; sourceTree = "<group>"; };
 		7104EE211CA837880097750E /* ColumnSpaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnSpaceView.swift; sourceTree = "<group>"; };
+		712069ED1CB0D0DB006B3071 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		713A0D2C1C69AF2F00735D43 /* VotingViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotingViewController2.swift; sourceTree = "<group>"; };
 		7172B57B1C44E63500C574DE /* SwiftBeacon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftBeacon-Bridging-Header.h"; sourceTree = "<group>"; };
 		719499051C40733100968504 /* OpenSourceVoting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSourceVoting.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +117,7 @@
 				7104EE1F1CA4B7D50097750E /* VotingViewController3.swift */,
 				71AED7971CADF1B5004E46A1 /* VotingPromptModuleView.swift */,
 				7104EE211CA837880097750E /* ColumnSpaceView.swift */,
+				712069ED1CB0D0DB006B3071 /* MenuView.swift */,
 				7172B57B1C44E63500C574DE /* SwiftBeacon-Bridging-Header.h */,
 				7194990C1C40733100968504 /* Main.storyboard */,
 				7194990F1C40733100968504 /* Assets.xcassets */,
@@ -277,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7194990B1C40733100968504 /* ViewController.swift in Sources */,
+				712069EE1CB0D0DB006B3071 /* MenuView.swift in Sources */,
 				719499091C40733100968504 /* AppDelegate.swift in Sources */,
 				713A0D2D1C69AF2F00735D43 /* VotingViewController2.swift in Sources */,
 				7104EE221CA837880097750E /* ColumnSpaceView.swift in Sources */,
