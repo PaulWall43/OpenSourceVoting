@@ -82,7 +82,7 @@ class VotingPromptModuleView: UIView {
     func configureTimer(time: String) -> UILabel{
         let x : CGFloat = frame.width * PROMPT_PADDING_LEFT //frame.width * PROMPT_PADDING_LEFT
         let y = promptLabel.frame.maxY + frame.height * PROMPT_PADDING_UP //frame.height * PROMPT_PADDING_UP + promptLabel.frame.maxY
-        let width = ((frame.width * (CGFloat(1.0) - (PROMPT_PADDING_RIGHT + PROMPT_PADDING_LEFT))) * 0.50) - frame.width * 0.1 - frame.width * PROMPT_PADDING_UP
+        let width = ((frame.width * (CGFloat(1.0) - (PROMPT_PADDING_RIGHT + PROMPT_PADDING_LEFT))) * 0.50) - frame.width * 0.1 - frame.height * PROMPT_PADDING_UP
 //        let height = (frame.height) * (CGFloat(1) - (CGFloat(1) - (PROMPT_PADDING_DOWN + PROMPT_PADDING_UP) + PROMPT_PADDING_UP)) 
         
         let height = frame.height * PROMPT_PADDING_DOWN - (frame.height * (PROMPT_PADDING_UP * 2))
@@ -98,10 +98,10 @@ class VotingPromptModuleView: UIView {
     }
     
     func configureVoteTotalLabel() -> UILabel{
-        let x = frame.width * 0.50 + frame.width * 0.1 + frame.width * PROMPT_PADDING_UP
+        let x = frame.width * 0.50 + frame.width * 0.1 + frame.height * PROMPT_PADDING_UP //NOTE USE OF HEIGHT
 
         let y = promptLabel.frame.maxY + frame.height * PROMPT_PADDING_UP
-        let width = ((frame.width * (CGFloat(1.0) - (PROMPT_PADDING_RIGHT + PROMPT_PADDING_LEFT))) * 0.50)  - frame.width * 0.1 - frame.width * PROMPT_PADDING_UP
+        let width = ((frame.width * (CGFloat(1.0) - (PROMPT_PADDING_RIGHT + PROMPT_PADDING_LEFT))) * 0.50)  - frame.width * 0.1 - frame.height * PROMPT_PADDING_UP
         //let height = (frame.height) * ( CGFloat(1) - (CGFloat(1) - (PROMPT_PADDING_DOWN + PROMPT_PADDING_UP) + PROMPT_PADDING_UP))
         let height = frame.height * PROMPT_PADDING_DOWN - (frame.height * (PROMPT_PADDING_UP * 2))
         let tempVTL = UILabel(frame: CGRectMake(x, y, width, height))
