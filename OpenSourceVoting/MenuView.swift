@@ -17,9 +17,6 @@ class MenuView: UIView {
         super.init(frame: frame)
         
         self.frame = frame
-        
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

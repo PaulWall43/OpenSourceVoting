@@ -16,6 +16,8 @@ import UIKit
 
 //<div>Icons made by <a href="http://www.flaticon.com/authors/elegant-themes" title="Elegant Themes">Elegant Themes</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
+//UIMENUVIEWCONTROLLER, IMAGE CASSETS
+
 let PROMPT_PADDING_LEFT : CGFloat = 0.05
 let PROMPT_PADDING_RIGHT : CGFloat = 0.05
 let PROMPT_PADDING_UP : CGFloat = 0.05
@@ -25,7 +27,7 @@ let DEFAULT_CORNER_RADIUS : CGFloat = 2.0
 
 let MENU_IMAGE_STRING = "MenuButtonBlack"
 
-class VotingPromptModuleView: UIView {
+class VotingPromptModuleView: UIView, VotingPrompt{
 
     var promptString : String!
     var promptLabel : UILabel!
@@ -38,6 +40,8 @@ class VotingPromptModuleView: UIView {
     var menuButton : UIButton!
     
     var timerInvalid : Bool = false
+    
+    var delegate: VotingPromptDelegate?
     
     init(promptString: String, frame: CGRect, time: String){
         super.init(frame: frame)
@@ -159,7 +163,7 @@ class VotingPromptModuleView: UIView {
     }
     
     func menuButtonPressed(){
-        
+        self.delegate?.displayOptions()
     }
     
     func updateVoteTotalLabel(numOfVotes : Int){
@@ -188,5 +192,5 @@ protocol VotingPrompt {
 }
 
 protocol VotingPromptDelegate {
-    func displayOptions(menuView : MenuView)
+    func displayOptions()
 }
