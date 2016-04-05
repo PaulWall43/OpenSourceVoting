@@ -50,7 +50,7 @@ var SUBMIT_BUTTON_LOC = SCREEN_SIZE.height * SUBMIT_BUTTON_LOC_PROPORTION
 let BAR_ANIMATE_TIME = 0.2
 
 
-class VotingViewController3: UIViewController, VotingColumnDelegate, VotingPromptDelegate {
+class VotingViewController3: UIViewController, VotingColumnDelegate, VotingPromptDelegate, MenuViewChildDelegate {
     /**** Instance Variables ****/
     var prompt : String!
     var numAns : Int!
@@ -316,12 +316,39 @@ class VotingViewController3: UIViewController, VotingColumnDelegate, VotingPromp
         let y = (SCREEN_SIZE.height - ((SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP) + SUBMIT_BUTTON_HEIGHT + SELECT_BUTTON_HEIGHT + 20)) + 20 + PROMPT_PADDING_UP * self.view.frame.width
         let width = self.view.frame.width * 0.80
         let height = SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP - 20 - (PROMPT_PADDING_UP * self.view.frame.width) * 2
-        let tempFrame = CGRectMake(x,y,width,height)
+        let tempFrame = CGRectMake(x,y,width,0)
         let tempMenuView = MenuView(frame: tempFrame)
+        UIView.animateWithDuration(0.2, animations: {
+            tempMenuView.resetFrame(CGRectMake(x,y,width,height))
+        })
         tempMenuView.backgroundColor = UIColor(white: 0.3, alpha: 0.5)
         self.view.addSubview(tempMenuView)
         
+        tempMenuView.delegate = self
+        
     }
+    
+    
+    /****MenuView Delegate methods****/
+    func pauseTime(){
+        print("here")
+    }
+    
+    func pauseVoting(){
+        print("here")
+    }
+    
+    func pauseBoth(){print("here")}
+    
+    func resetAll(){print("here")}
+    
+    func editTime(){print("here")}
+    
+    func newQuestion(){print("here")}
+    
+    func closePoll(){print("here")}
+    
+    func editPrompt(){print("here")}
     
     
     override func didReceiveMemoryWarning() {
