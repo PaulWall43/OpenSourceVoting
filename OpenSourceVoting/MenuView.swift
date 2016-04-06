@@ -8,25 +8,26 @@
 
 import UIKit
 
-let NUMBER_OF_OPTIONS = 8
+let NUMBER_OF_OPTIONS = 7
 
-let ACTION_OPTIONS = ["Pause time", "Pause voting", "Pause both", "Reset all", "Edit time", "New question", "Close poll", "Edit prompt"]
+let ACTION_OPTIONS = ["Pause time", "Pause voting", /*"Pause both",*/ "Reset all", "Edit time", "New question", "Close poll", "Edit prompt"]
 
-let ACTIONS_FUNCTIONS = ["pauseTime", "pauseVoting", "pauseBoth", "resetAll", "editTime", "newQuestion", "closePoll", "editPrompt"]
+let ACTIONS_FUNCTIONS = ["pauseTime", "pauseVoting", /*"pauseBoth",*/ "resetAll", "editTime", "newQuestion", "closePoll", "editPrompt"]
 
 class MenuView: UIView, MenuViewChild {
 
     var optionsArr : [UIButton] = []
     var delegate: MenuViewChildDelegate?
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, _ isPaused : Bool = false, _ isPausedVote : Bool = false) {
         super.init(frame: frame)
         
         
         self.frame = frame
         self.layer.cornerRadius = 10
+        
         //Add the eight options
-        constructOptionButtons(frame)
+        constructOptionButtons(frame, isPaused: isPaused, isPausedVote: isPausedVote)
         
     }
     
@@ -34,7 +35,7 @@ class MenuView: UIView, MenuViewChild {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func constructOptionButtons(frame: CGRect){
+    func constructOptionButtons(frame: CGRect, isPaused : Bool, isPausedVote : Bool){
         for i in 0 ... NUMBER_OF_OPTIONS - 1{
             let x : CGFloat = 0
             let y = CGFloat(i) * (frame.height / CGFloat(NUMBER_OF_OPTIONS))
@@ -55,12 +56,20 @@ class MenuView: UIView, MenuViewChild {
         
         optionsArr[0].addTarget(self, action: #selector(MenuView.pauseTime), forControlEvents: .TouchUpInside)
         optionsArr[1].addTarget(self, action: #selector(MenuView.pauseVoting), forControlEvents: .TouchUpInside)
-        optionsArr[2].addTarget(self, action: #selector(MenuView.pauseBoth), forControlEvents: .TouchUpInside)
-        optionsArr[3].addTarget(self, action: #selector(MenuView.resetAll), forControlEvents: .TouchUpInside)
-        optionsArr[4].addTarget(self, action: #selector(MenuView.editTime), forControlEvents: .TouchUpInside)
-        optionsArr[5].addTarget(self, action: #selector(MenuView.newQuestion), forControlEvents: .TouchUpInside)
-        optionsArr[6].addTarget(self, action: #selector(MenuView.closePoll), forControlEvents: .TouchUpInside)
-        optionsArr[7].addTarget(self, action: #selector(MenuView.editPrompt), forControlEvents: .TouchUpInside)
+        //optionsArr[2].addTarget(self, action: #selector(MenuView.pauseBoth), forControlEvents: .TouchUpInside)
+        optionsArr[2].addTarget(self, action: #selector(MenuView.resetAll), forControlEvents: .TouchUpInside)
+        optionsArr[3].addTarget(self, action: #selector(MenuView.editTime), forControlEvents: .TouchUpInside)
+        optionsArr[4].addTarget(self, action: #selector(MenuView.newQuestion), forControlEvents: .TouchUpInside)
+        optionsArr[5].addTarget(self, action: #selector(MenuView.closePoll), forControlEvents: .TouchUpInside)
+        optionsArr[6].addTarget(self, action: #selector(MenuView.editPrompt), forControlEvents: .TouchUpInside)
+        
+        if(isPaused){
+            optionsArr[0].setTitle("Start time", forState: .Normal)
+        }
+        
+        if isPausedVote{
+            optionsArr[1].setTitle("Unpause voting", forState: .Normal)
+        }
         
     }
     
@@ -81,9 +90,46 @@ class MenuView: UIView, MenuViewChild {
     
     func editPrompt(){delegate?.editPrompt()}
     
-    func resetFrame(frame: CGRect){
+    func resetFrame(frame: CGRect, isPaused : Bool, isPausedVote : Bool){
         self.frame = frame
-        constructOptionButtons(frame)
+        print(isPausedVote)
+        constructOptionButtons(frame, isPaused: isPaused, isPausedVote: isPausedVote)
+    }
+    
+    
+    //UPDATE METHODS, SHOULD USE AN ENUM FOR INDEX ACCESSES
+    
+    func updatePauseLabel(){
+        if (optionsArr[0].titleLabel?.text == "Pause time"){
+            optionsArr[0].setTitle("Start time", forState: .Normal)
+        } else {
+            optionsArr[0].setTitle("Pause time", forState: .Normal)
+        }
+    }
+    
+    func updateVoteLabel(){
+        if (optionsArr[1].titleLabel?.text == "Pause voting"){
+            optionsArr[1].setTitle("Unpause voting", forState: .Normal)
+        } else {
+            optionsArr[1].setTitle("Pause voting", forState: .Normal)
+        }
+    }
+    
+    
+    func setPauseLabel(val: Bool){
+        if val{
+            optionsArr[0].setTitle("Start time", forState: .Normal)
+        } else {
+            optionsArr[0].setTitle("Pause time", forState: .Normal)
+        }
+    }
+    
+    func setVoteLabel(val: Bool){
+        if val{
+            optionsArr[1].setTitle("Unpause voting", forState: .Normal)
+        } else {
+            optionsArr[1].setTitle("Pause voting", forState: .Normal)
+        }
     }
     /*
     // Only override drawRect: if you perform custom drawing.

@@ -34,6 +34,7 @@ class VotingPromptModuleView: UIView, VotingPrompt{
     
     var timer: NSTimer!
     var timerLabel : UILabel!
+    var isPaused : Bool = true //can set to true to start with no timer
     
     var voteTotalLabel : UILabel!
     
@@ -58,7 +59,13 @@ class VotingPromptModuleView: UIView, VotingPrompt{
         self.backgroundColor = SUBMIT_VOTE_BUTTON_COLOR
         
         //Start timer (May change this behavior later)
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(VotingPromptModuleView.updateTimer), userInfo: nil, repeats: true)
+        
+        
+        self.timer = NSTimer(timeInterval: 1.0, target: self, selector: "pauseTime", userInfo: nil, repeats: false)
+        
+        //Uncomment to start with timer counting down
+//        self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(VotingPromptModuleView.updateTimer), userInfo: nil, repeats: true)
+//        self.isPaused = false
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -162,6 +169,9 @@ class VotingPromptModuleView: UIView, VotingPrompt{
         self.timerLabel.text = sM + ":" + sS
     }
     
+    
+    
+    
     func menuButtonPressed(){
         self.delegate?.displayOptions()
     }
@@ -174,6 +184,28 @@ class VotingPromptModuleView: UIView, VotingPrompt{
         return timerInvalid
     }
     
+    /*****METHODS CALLED BY DELEGATE****/
+    func pauseOrStartTime() -> Bool{
+        if !isPaused {
+            self.timer.invalidate()
+            isPaused = true
+        } else {
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(VotingPromptModuleView.updateTimer), userInfo: nil, repeats: true)
+            isPaused = false
+        }
+        
+        return isPaused
+    }
+    
+    func setVoteTimer(val: Bool){
+        if val{
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(VotingPromptModuleView.updateTimer), userInfo: nil, repeats: true)
+            isPaused = false
+        } else {
+                self.timer.invalidate()
+                isPaused = true
+        }
+    }
     
     
     /*

@@ -72,6 +72,10 @@ class VotingViewController3: UIViewController, VotingColumnDelegate, VotingPromp
     var inNavigationStack : Bool = false
     var navBarOffset : CGFloat!
     
+    var menuView : MenuView?
+    var menuOpen : Bool = false
+    
+    var votingEnabled : Bool = true
     //WILL ADD A VOTINGMODULE INSTANCE VARIABLE TO THE PROTOCOL AND THIS CLASS TO TAKE OUT ALL THIS IMPLEMENTATION
     
     /**** Contstructors ****/
@@ -246,8 +250,10 @@ class VotingViewController3: UIViewController, VotingColumnDelegate, VotingPromp
 
     /****DELEGATE METHODS****/
     func voteSubmitted() {
+        
+        
         //implement here
-        if(votingPromptModule.isTimerInvalid()){
+        if(votingPromptModule.isTimerInvalid() || !votingEnabled){
             return //SHOULD PROVIDE SOME NOTIFICATION IN THE FUTURE
         }
         if lastColumnSelected != nil {
@@ -316,29 +322,50 @@ class VotingViewController3: UIViewController, VotingColumnDelegate, VotingPromp
         let y = (SCREEN_SIZE.height - ((SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP) + SUBMIT_BUTTON_HEIGHT + SELECT_BUTTON_HEIGHT + 20)) + 20 + PROMPT_PADDING_UP * self.view.frame.width
         let width = self.view.frame.width * 0.80
         let height = SCREEN_SIZE.height * MAX_BAR_HEIGHT_PROP - 20 - (PROMPT_PADDING_UP * self.view.frame.width) * 2
-        let tempFrame = CGRectMake(x,y,width,0)
-        let tempMenuView = MenuView(frame: tempFrame)
-        UIView.animateWithDuration(0.2, animations: {
-            tempMenuView.resetFrame(CGRectMake(x,y,width,height))
-        })
-        tempMenuView.backgroundColor = UIColor(white: 0.3, alpha: 0.5)
-        self.view.addSubview(tempMenuView)
         
-        tempMenuView.delegate = self
+        if (!menuOpen){
+            
+            let tempFrame = CGRectMake(x,y,width,0)
+            let tempMenuView = MenuView(frame: tempFrame)
+            UIView.animateWithDuration(0.2, animations: {
+                tempMenuView.resetFrame(CGRectMake(x,y,width,height), isPaused: self.votingPromptModule.isPaused, isPausedVote: !self.votingEnabled) //!votingEnabled == votingPaused
+            })
+            tempMenuView.backgroundColor = UIColor(white: 0.3, alpha: 0.5)
+            self.view.addSubview(tempMenuView)
+            
+            tempMenuView.delegate = self
+            menuView = tempMenuView
+            menuOpen = true
+        } else {
+            //close the menu
+            menuView?.removeFromSuperview()
+            menuView = nil
+            menuOpen = false
+        }
         
     }
     
     
     /****MenuView Delegate methods****/
     func pauseTime(){
-        print("here")
+        self.votingPromptModule.pauseOrStartTime()
+        self.menuView?.updatePauseLabel()
     }
     
     func pauseVoting(){
-        print("here")
+        self.updateVotingEnabled()
+        //change the label of the menu
+        self.menuView!.updateVoteLabel()
     }
     
-    func pauseBoth(){print("here")}
+    func pauseBoth(){
+        sVotingEnabled(false) //setVotingEnabled
+        self.menuView!.updateVoteLabel()
+        
+        self.votingPromptModule.setVoteTimer(false)
+        self.menuView?.updatePauseLabel()
+        
+    }
     
     func resetAll(){print("here")}
     
@@ -391,6 +418,16 @@ class VotingViewController3: UIViewController, VotingColumnDelegate, VotingPromp
     
     /**** SETTERS ****/
     //Incomplete..
+    
+    func updateVotingEnabled(){
+        self.votingEnabled = !self.votingEnabled
+        
+        
+    }
+    
+    func sVotingEnabled(val : Bool){
+        self.votingEnabled = val
+    }
     
 
     /*
